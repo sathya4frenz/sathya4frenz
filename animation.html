@@ -1,0 +1,283 @@
+@keyframes name{
+
+      from{
+
+        [styles];
+
+      }
+
+      to{
+
+        [styles];
+
+      }
+
+
+<!--<style>
+.box{
+	 width: 100px;
+  height: 100px;
+  background: red;
+  position: relative;
+	animation-name: myname;
+	animation-duration: 2s;
+	animation-iteration-count: 10;
+	/*animation-timing-function: ease-in-out;*/
+	animation-direction: alternate;
+
+}
+
+@keyframes [myname]{
+0%{
+
+        height:100px;
+      }
+
+      33%{
+
+        height:500px;
+
+      }
+	75%{
+
+        width:500px;
+
+      }
+	100%{
+	background: yellow;
+	}
+}
+
+
+
+</style>
+<div class="box"></div>-->
+
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+.box{
+	 width: 100px;
+  height: 100px;
+  background: red;
+  position: relative;
+	animation-name: myname;
+	animation-duration: 2s;
+	animation-iteration-count: 10;
+	/*animation-timing-function: ease-in-out;*/
+	animation-direction: alternate;
+
+}
+
+@keyframes myname{
+0%{
+
+        height:100px;
+      }
+
+      33%{
+
+        height:500px;
+
+      }
+	75%{
+
+        width:500px;
+
+      }
+	100%{
+	background: yellow;
+	}
+}
+
+.pulsedbox {
+ /*-webkit-animation-name: pulse;
+ -webkit-animation-duration: 4s;
+ -webkit-animation-direction: alternate;
+ -webkit-animation-timing-function: ease-in-out;*/
+width: 200px;
+  height: 100px;
+animation-name: pulse;
+animation-duration: 4s;
+animation-direction: alternate;
+animation-timing-function: ease-in-out;
+}
+@-webkit-keyframes pulse {
+ 0% {
+   background-color: red;
+   opacity: 1.0;
+   -webkit-transform: scale(1.0) rotate(0deg);
+ }
+ 33% {
+   background-color: blue;
+   opacity: 0.75;
+   -webkit-transform: scale(1.1) rotate(-5deg);
+ }
+ 67% {
+   background-color: green;
+   opacity: 0.5;
+   -webkit-transform: scale(1.1) rotate(5deg);
+ }
+ 100% {
+   background-color: red;
+   opacity: 1.0;
+   -webkit-transform: scale(1.0) rotate(0deg);
+ }
+}
+
+
+</style>
+</head>
+<body>
+
+<h1>The @keyframes Rule</h1>
+
+<!--<div class="box"></div>-->
+<div class="pulsedbox">pulsedbox</div>
+
+</body>
+</html>
+
+
+
+ng g c sample
+
+ 
+
+ 
+
+samplecomponent.html
+samplecomponent.ts
+samplecomponent.service.ts
+samplecomponent.css
+
+ 
+
+ 
+
+Creating a service
+==================
+
+ 
+
+sampleservice.ts
+
+ 
+
+import{Injectable} from '@angular/core'
+import{HttpClient, HttpHeaders} from '/angular/common/http'
+
+ 
+
+@Injectable({
+ProvideIn: 'root'
+})
+
+ 
+
+export Class SampleService{
+
+ 
+
+Privite readonly Samplestore = 'json/sample.json'
+
+ 
+
+constructor(private http: HttpClient){}
+
+ 
+
+getSampleService(){
+return this.http.get(this.Samplestore);
+}
+
+}
+
+ 
+
+Creating a samplecomponent.ts
+=============================
+
+ 
+
+import {component, onInit} from '@angular/core'
+import {Router} from '@angular/router'
+import {SampleService} from '/service/sampleservice.ts'
+
+ 
+
+@component({
+selector: 'app-sample'
+templateURL: '/samplecomponent.html'
+styleUrls:'/samplecomponent.css'
+})
+
+ 
+
+ 
+
+export Class SampleComponent {
+
+ 
+
+productlist: any;
+
+ 
+
+constructor(public sampleservice: SampleService) {}
+
+ 
+
+ngOninit(){}
+
+ 
+
+GetSampleServicelist(){
+this.SampleService.getSampleService().subscribe((data:any) =>{
+this.productlist = data;
+},
+(error:HttpErrorResponse) => {
+
+ 
+
+});
+
+ 
+
+}
+
+ 
+
+ 
+
+}
+
+ 
+
+Creating a samplecomponent.html
+=============================
+
+ 
+
+<p-table value="productlist" [rows] = "50">
+
+ 
+
+<ng-template pTemplate="header">
+
+ 
+
+</ng-template>
+
+ 
+
+<ng-template pTemplate="body">
+
+ 
+
+</ng-template>
+
+ 
+
+</p-table>
