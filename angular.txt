@@ -1,0 +1,156 @@
+create new module and update common module
+============================================
+
+ng g module loans --route loans --module app.module
+
+creates =>
+
+loans.component.css
+loans.component.html
+loans.component.spec.ts
+loans.component.ts
+loans.module.ts
+loans-routing.module.ts
+
+To create a service using the ng command, you need to
+======================================================
+
+ ng generate service service-name or ng g s service-name.
+
+component.ts:
+=============
+
+import {Component, OnInit} from '@angular/core';
+import {ServiceName} from '/services/servicename.service';
+
+@Component({
+	selector:'app-dashboard',
+	templateUrl: './dashboard.component.html',
+	styleUrls: ['./dashboard.component.css']
+})
+
+export class DashboardComponent implements OnInit{
+	constructor(public servicename: ServiceName ){}
+Loanslist: any = [];
+ngOnInit(){}
+
+getLoanList(){
+	this.servicename.getLoan.subscribe((data:any)=>{
+		this.Loanslist = data;
+	},
+	(error:HttpErrorResponse)=>{
+	
+	});
+}
+
+}
+
+service:
+========
+
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+
+@Injectable({
+	providedIn: 'root'
+})
+
+export class SeviceName{
+	private readonly LoansUrl = "./data/laons.json";
+constructor(private http: HttpClient) { }
+
+getLoan(){
+	return this.http.get(this.LoansUrl);
+}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+import { Component, Oninit } from '@angular/core';
+import {Router} from '@angular/router'
+import {Service} from '/service/servicename.service'
+
+@Constructor({
+ selector: 'app-sample'
+templateURL: '/samplecomponent.html'
+styleUrls:'/samplecomponent.css'
+})
+
+export class Componentname implements Oninit{
+	constructor(private servicename:ServiceName){}
+variable : string = [];
+ngOninit(){}
+
+getapplist(){
+	this.servicename.getApp().subscribe((data: any)=>{
+		this.variable = data;
+},
+(error:HttpErrorRespnse)=>{
+	
+});
+}
+}
+
+
+import {Injectable} from '@angular/core';
+import{HttpClient, HttpHeaders} from '/angular/common/http'
+
+@Injectable({
+	ProvideIn: 'root'
+})
+
+export class ServiceName{
+	private jsonUrl = "data/assets/data.json";
+	getApp(){
+		return this.http.get(this.jsonUrl);
+	}
+	
+}
+
+
+types of pipes in angular
+integrate html with angular
+
+What is Angular? y use ang? ang adv?
+	framework
+	used to create spa	
+	google developed and is maintaining
+	many versions available
+	web appln developement tool
+	since it has components modules directives etc... it is easy for developers
+
+what is ngmodules? what happ when u import an ngmodule into another ngmodule? what is meant lazy loaded ngmodule? why ang has modular feature? how many modules can we have max? y does angular has modules
+
+
+	ng module separates your codes into modules
